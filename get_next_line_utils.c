@@ -6,9 +6,11 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:37 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/17 22:40:35 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/18 20:07:01 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 char	*ft_strdup(const char *s1)
 {
@@ -19,7 +21,7 @@ char	*ft_strdup(const char *s1)
 	len = ft_strlen(s1);
 	arr = (char *)malloc((len + 1) * (sizeof(char)));
 	if (!(arr))
-		return (0);
+		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')
 	{

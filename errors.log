@@ -1,0 +1,73 @@
+=================================================================
+==24588==ERROR: AddressSanitizer: heap-use-after-free on address 0x602000000190 at pc 0x00010a0c0163 bp 0x7ffee5b44f40 sp 0x7ffee5b44f38
+READ of size 1 at 0x602000000190 thread T0
+    #0 0x10a0c0162 in ft_strlen get_next_line.c:20
+    #1 0x10a0c0af4 in ft_strjoin get_next_line_utils.c:65
+    #2 0x10a0c03ba in result_line get_next_line.c:64
+    #3 0x10a0c0208 in get_next_line get_next_line.c:36
+    #4 0x10a0bf9d0 in test_gnl_func file_utils.c:40
+    #5 0x10a0b8972 in main tester.c:193
+    #6 0x7fff6b1f6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+0x602000000190 is located 0 bytes inside of 9-byte region [0x602000000190,0x602000000199)
+freed by thread T0 here:
+    #0 0x10d6c32c6 in wrap_free+0xa6 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x492c6)
+    #1 0x10a0ba255 in free malloc_mock.c:82
+    #2 0x10a0c0289 in get_next_line get_next_line.c:40
+    #3 0x10a0bf9d0 in test_gnl_func file_utils.c:40
+    #4 0x10a0b889b in main tester.c:193
+    #5 0x7fff6b1f6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+previously allocated by thread T0 here:
+    #0 0x10d6c317d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
+    #1 0x10a0b9c1c in malloc malloc_mock.c:65
+    #2 0x10a0c072e in ft_strdup get_next_line_utils.c:22
+    #3 0x10a0c0626 in save_backup get_next_line.c:85
+    #4 0x10a0c02a6 in get_next_line get_next_line.c:43
+    #5 0x10a0bf9d0 in test_gnl_func file_utils.c:40
+    #6 0x10a0b87ef in main tester.c:193
+    #7 0x7fff6b1f6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-use-after-free get_next_line.c:20 in ft_strlen
+Error in test 4: get_next_line(5: "read_error.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in ft_strlen get_next_line.c:20:9
+     in ft_strjoin get_next_line_utils.c:65:9
+     in result_line get_next_line.c:64:10
+     in get_next_line get_next_line.c:36:7
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:193:2
+
+=================================================================
+==24618==ERROR: AddressSanitizer: heap-use-after-free on address 0x6030000017b0 at pc 0x0001066452cc bp 0x7ffee95c0080 sp 0x7ffee95c0078
+READ of size 1 at 0x6030000017b0 thread T0
+    #0 0x1066452cb in get_next_line get_next_line.c:38
+    #1 0x106644a30 in test_gnl_func file_utils.c:40
+    #2 0x10663ded3 in main tester.c:193
+    #3 0x7fff6b1f6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+0x6030000017b0 is located 0 bytes inside of 23-byte region [0x6030000017b0,0x6030000017c7)
+freed by thread T0 here:
+    #0 0x109c452c6 in wrap_free+0xa6 (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x492c6)
+    #1 0x10663f2b5 in free malloc_mock.c:82
+    #2 0x1066452e9 in get_next_line get_next_line.c:40
+    #3 0x10663de9c in main tester.c:193
+    #4 0x7fff6b1f6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+previously allocated by thread T0 here:
+    #0 0x109c4517d in wrap_malloc+0x9d (libclang_rt.asan_osx_dynamic.dylib:x86_64h+0x4917d)
+    #1 0x10663ec7c in malloc malloc_mock.c:65
+    #2 0x10664578e in ft_strdup get_next_line_utils.c:22
+    #3 0x106645686 in save_backup get_next_line.c:85
+    #4 0x106645306 in get_next_line get_next_line.c:43
+    #5 0x106644a30 in test_gnl_func file_utils.c:40
+    #6 0x10663ddfb in main tester.c:193
+    #7 0x7fff6b1f6cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
+
+SUMMARY: AddressSanitizer: heap-use-after-free get_next_line.c:38 in get_next_line
+Error in test 3: get_next_line(5: "read_error.txt"): Memory problems!
+     in sigabort utils.c:58:1
+     in get_next_line get_next_line.c:38:22
+     in test_gnl_func file_utils.c:40:8
+     in main tester.c:193:2
+
