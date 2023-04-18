@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/18 21:18:47 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/18 21:41:57 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,4 @@ char	*save_backup(char *line)
 
 //backup, buffer, line
 //static 구조체 (fd, backup, next)
-//char * buffer, line
+//char * buffer, line 
