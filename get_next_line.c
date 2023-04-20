@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/18 21:41:57 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/20 22:41:14 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	backup = save_backup(line);
+	// if (!backup)
+	// 	line = NULL;
 	return (line);
 }
-
+////abc\n\02
+//a\0
 char	*result_line(int fd, char *backup, char *buffer)
 {
 	char	*temp;
 	int		len;
 
+	
 	len = 0;
 	while (1)
 	{
@@ -61,13 +65,15 @@ char	*result_line(int fd, char *backup, char *buffer)
 		buffer[len] = '\0';
 		if (backup == NULL)
 			backup = ft_strdup("");
+		if (!backup)
+			return (NULL);
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
+		free(temp);
 		if (backup == NULL)
 			return (NULL);
-		free(temp);
 		temp = NULL;
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr(backup, '\n'))
 			break ;
 	}
 	return (backup);
@@ -85,7 +91,10 @@ char	*save_backup(char *line)
 		return (NULL);
 	tmp = ft_strdup(&line[i + 1]);
 	if (tmp == NULL)
+	{
+		free(line);
 		return (NULL);
+	}
 	line[i + 1] = '\0';
 	return (tmp);
 }
