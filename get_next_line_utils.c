@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:37 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/18 20:07:01 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/20 22:47:10 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	result = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!result)
 		return (0);
+	
+	char *result_cpy = result;
+	while (s1)
+		result_cpy++ = s1++;
+	while (s2)
+		result_cpy++ = s2++;
+	
 	ft_memcpy (result, s1, s1_len);
 	ft_memcpy (result + s1_len, s2, s2_len);
 	result[s1_len + s2_len] = '\0';
