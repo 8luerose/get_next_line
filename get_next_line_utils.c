@@ -6,11 +6,21 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:37 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/21 20:38:30 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/21 20:41:12 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
 
 char	*ft_strdup(const char *s1)
 {
@@ -30,24 +40,6 @@ char	*ft_strdup(const char *s1)
 	}
 	arr[len] = '\0';
 	return (arr);
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	unsigned char	*dst_p;
-	unsigned char	*src_p;
-
-	dst_p = (unsigned char *)dst;
-	src_p = (unsigned char *)src;
-	if (n == 0 || dst == src)
-		return (dst);
-	while (n--)
-	{
-		*dst_p = *src_p;
-		dst_p++;
-		src_p++;
-	}
-	return (dst);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
