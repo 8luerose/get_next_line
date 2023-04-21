@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:37 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/21 20:30:13 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/21 20:38:30 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ char	*ft_strchr(const char *s, int c)
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*result;
+	char	*result_cpy;
 	size_t	s_len;
 	size_t	result_len;
 
@@ -117,7 +118,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	result = (char *)malloc((result_len + 1) * sizeof(char));
 	if (!result)
 		return (0);
-	ft_memcpy(result, s + start, result_len);
+	result_cpy = result;
+	while (*(s + start))
+		*(result_cpy++) = *(s + start++);
+	// ft_memcpy(result, s + start, result_len);
 	result[result_len] = '\0';
 	return (result);
 }
