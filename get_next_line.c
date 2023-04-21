@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/21 20:41:13 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:19:10 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd)
 		backup = NULL;
 		return (NULL);
 	}
-	backup = save_backup(line);
+	backup = save_backup(&line);
 	// if (!backup)
 	// 	line = NULL;
 	return (line);
@@ -68,27 +68,37 @@ char	*result_line(int fd, char *backup, char *buffer)
 	return (backup);
 }
 
-char	*save_backup(char *line)
+char	*save_backup(char **a)
 {
 	char	*tmp;
+	char	*line;
 	int		i;
 	int		len;
 
 	i = 0;
+	line = *a;
 	while (line[i] != '\0' && line[i] != '\n')
 		i++;
 	if (line[i] == '\0' || line[i + 1] == '\0')
 		return (NULL);
-	len = i + 1;
 	tmp = ft_strdup(&line[i + 1]);
 	if (tmp == NULL)
 	{
 		free(line);
 		return (NULL);
 	}
-	line[i + 1] = '\0';
+	len = i + 1;
+	line[len] = '\0';
+	*a = ft_strdup(line);
+	line[len] = '1';
+	free(line);
+	if (!*a)
+		return (0);
 	return (tmp);
 }
+////abc\n\02899999 free(line + i + 1);
+//a\0
+
 
 //backup, buffer, line
 //static 구조체 (fd, backup, next)
