@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/20 22:41:14 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/21 19:58:40 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*result_line(int fd, char *backup, char *buffer)
 	char	*temp;
 	int		len;
 
-	
 	len = 0;
 	while (1)
 	{
@@ -65,8 +64,8 @@ char	*result_line(int fd, char *backup, char *buffer)
 		buffer[len] = '\0';
 		if (backup == NULL)
 			backup = ft_strdup("");
-		if (!backup)
-			return (NULL);
+		// if (!backup)
+		// 	return (NULL);
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
 		free(temp);
