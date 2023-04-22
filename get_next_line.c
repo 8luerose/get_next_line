@@ -6,11 +6,11 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/21 21:19:10 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/22 15:01:45 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line. h"
 
 char	*get_next_line(int fd)
 {
@@ -27,13 +27,12 @@ char	*get_next_line(int fd)
 	free(buffer);
 	if (line == NULL || line[0] == '\0')
 	{
-		free(backup);
 		backup = NULL;
 		return (NULL);
 	}
 	backup = save_backup(&line);
-	// if (!backup)
-	// 	line = NULL;
+	if (!backup)
+		line = NULL;
 	return (line);
 }
 ////abc\n\02
@@ -54,8 +53,8 @@ char	*result_line(int fd, char *backup, char *buffer)
 		buffer[len] = '\0';
 		if (backup == NULL)
 			backup = ft_strdup("");
-		// if (!backup)
-		// 	return (NULL);
+		if (!backup)
+			return (NULL);
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
 		free(temp);
