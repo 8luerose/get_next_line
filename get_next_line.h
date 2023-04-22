@@ -6,11 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:21:07 by taehkwon          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/04/22 17:03:55 by taehkwon         ###   ########.fr       */
-=======
-/*   Updated: 2023/04/21 21:18:44 by taehkwon         ###   ########.fr       */
->>>>>>> ed77304735ede74332ea2ab56bcf593933227b11
+/*   Updated: 2023/04/22 17:39:30 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +22,7 @@
 
 char	*get_next_line(int fd);
 char	*result_line(int fd, char *backup, char *buffer);
-<<<<<<< HEAD
 char	*save_backup(char **line);
-=======
-char	*save_backup(char **a);
->>>>>>> ed77304735ede74332ea2ab56bcf593933227b11
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
