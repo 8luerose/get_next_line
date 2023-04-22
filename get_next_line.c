@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/22 17:35:04 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:36:05 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ char	*get_next_line(int fd)
 	free(buffer);
 	if (line == NULL || line[0] == '\0')
 	{
+		free(backup);
 		backup = NULL;
 		return (NULL);
 	}
-	backup = save_backup(line);
+	backup = save_backup(&line);
 	// if (!backup)
 	// 	line = NULL;
 	return (line);
@@ -66,28 +67,38 @@ char	*result_line(int fd, char *backup, char *buffer)
 	return (backup);
 }
 
-char	*save_backup(char *line)
+char	*save_backup(char **line)
 {
 	char	*tmp;
+	char	*line_original;
 	int		i;
 	int		len;
 
 	i = 0;
-	while (line[i] != '\0' && line[i] != '\n')
+	while ((*line)[i] != '\0' && (*line)[i] != '\n')
 		i++;
 	if ((*line)[i] == '\0' || (*line)[i + 1] == '\0')
 		return (NULL);
-	len = i + 1;
-	tmp = ft_strdup(&line[i + 1]);
+	tmp = ft_strdup((*line) + i + 1);
 	if (tmp == NULL)
 	{
 		free(*line);
 		return (NULL);
 	}
-	line[i + 1] = '\0';
+	(*line)[i + 1] = '\0';
+	len = i + 1;
+	line_original = *line;
+	*line = ft_substr(*line, 0, len);
+	if (!*line)
+		return (NULL);
+	free(line_original);
+	// free(line + i + 1 + 1);
 	return (tmp);
 }
+////abc\n12345
+////abc\n\02345
+//a\0
 
 //backup, buffer, line
 //static 구조체 (fd, backup, next)
-//char * buffer, line 
+//char * buffer, line
