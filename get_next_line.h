@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:21:07 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/21 20:41:26 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:03:55 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 char	*get_next_line(int fd);
 char	*result_line(int fd, char *backup, char *buffer);
-char	*save_backup(char *line);
+char	*save_backup(char **line);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);

@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/21 20:41:13 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:28:15 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,18 @@ char	*get_next_line(int fd)
 		backup = NULL;
 		return (NULL);
 	}
-	backup = save_backup(line);
+	backup = save_backup(&line);
 	// if (!backup)
 	// 	line = NULL;
 	return (line);
 }
 ////abc\n\02
-//a\0
+
 char	*result_line(int fd, char *backup, char *buffer)
 {
 	char	*temp;
 	int		len;
 
-	len = 0;
 	while (1)
 	{
 		len = read(fd, buffer, BUFFER_SIZE);
@@ -54,8 +53,8 @@ char	*result_line(int fd, char *backup, char *buffer)
 		buffer[len] = '\0';
 		if (backup == NULL)
 			backup = ft_strdup("");
-		// if (!backup)
-		// 	return (NULL);
+		if (!backup)
+			return (NULL);
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
 		free(temp);
@@ -68,27 +67,37 @@ char	*result_line(int fd, char *backup, char *buffer)
 	return (backup);
 }
 
-char	*save_backup(char *line)
+char	*save_backup(char **line)
 {
 	char	*tmp;
+	char	*line_original;
 	int		i;
 	int		len;
 
 	i = 0;
-	while (line[i] != '\0' && line[i] != '\n')
+	while ((*line)[i] != '\0' && (*line)[i] != '\n')
 		i++;
-	if (line[i] == '\0' || line[i + 1] == '\0')
+	if ((*line)[i] == '\0' || (*line)[i + 1] == '\0')
 		return (NULL);
-	len = i + 1;
-	tmp = ft_strdup(&line[i + 1]);
+	tmp = ft_strdup((*line) + i + 1);
 	if (tmp == NULL)
 	{
-		free(line);
+		free(*line);
 		return (NULL);
 	}
-	line[i + 1] = '\0';
+	(*line)[i + 1] = '\0';
+	len = i + 1;
+	line_original = *line;
+	*line = ft_substr(*line, 0, len);
+	if (!*line)
+		return (NULL);
+	free(line_original);
+	// free(line + i + 1 + 1);
 	return (tmp);
 }
+////abc\n12345
+////abc\n\02345
+//a\0
 
 //backup, buffer, line
 //static 구조체 (fd, backup, next)
