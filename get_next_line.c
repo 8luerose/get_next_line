@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/26 19:06:57 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/26 20:59:26 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ char	*save_backup(char **line)
 		i++;
 	if ((*line)[i] == '\0' || (*line)[i + 1] == '\0')
 		return (NULL);
+
+	char *new_line = ft_strdup(*line); // Add this line
+	free(*line); // And this line
+	*line = new_line; // And this line
+
 	backup = ft_strdup((*line) + i + 1);
 	if (backup == NULL)
 	{
