@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   before_get_next_line.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/26 19:06:57 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:48:20 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*get_next_line(int fd)
 {
 	static char	*backup;
 	char		*line;
-	char		*result_line;
 	char		*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -24,7 +23,7 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
-	line = make_line(fd, backup, buffer);
+	line = result_line(fd, backup, buffer);
 	free(buffer);
 	if (line == NULL || line[0] == '\0')
 	{
@@ -33,13 +32,13 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	backup = save_backup(&line);
-	result_line = cut_line(&line);
-	if (line)
-		free (line);
-	return (result_line);
+	// if (!backup)
+	// 	line = NULL;
+	return (line);
 }
+////abc\n\02
 
-char	*make_line(int fd, char *backup, char *buffer)
+char	*result_line(int fd, char *backup, char *buffer)
 {
 	char	*temp;
 	int		len;
@@ -59,9 +58,9 @@ char	*make_line(int fd, char *backup, char *buffer)
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
 		free(temp);
-		temp = NULL;
 		if (backup == NULL)
 			return (NULL);
+		temp = NULL;
 		if (ft_strchr(backup, '\n'))
 			break ;
 	}
@@ -70,39 +69,31 @@ char	*make_line(int fd, char *backup, char *buffer)
 
 char	*save_backup(char **line)
 {
-	char	*backup;
+	char	*tmp;
+	char	*line_original;
 	int		i;
+	int		len;
 
 	i = 0;
 	while ((*line)[i] != '\0' && (*line)[i] != '\n')
 		i++;
 	if ((*line)[i] == '\0' || (*line)[i + 1] == '\0')
 		return (NULL);
-	backup = ft_strdup((*line) + i + 1);
-	if (backup == NULL)
+	tmp = ft_strdup((*line) + i + 1);
+	if (tmp == NULL)
 	{
 		free(*line);
 		return (NULL);
 	}
 	(*line)[i + 1] = '\0';
-	return (backup);
-}
-
-char	*cut_line(char **line)
-{
-	int		i;
-	char	*result_line;
-
-	i = 0;
-	while ((*line)[i] != '\0' && (*line)[i] != '\n')
-		i++;
-	if ((*line)[i] == '\0')
-		result_line = ft_strdup(*line);
-	else
-		result_line = ft_substr(*line, 0, i + 1);
-	if (!result_line)
+	len = i + 1;
+	line_original = *line;
+	*line = ft_substr(*line, 0, len);
+	if (!*line)
 		return (NULL);
-	return (result_line);
+	free(line_original);
+	// free(line + i + 1 + 1);
+	return (tmp);
 }
 ////abc\n12345
 ////abc\n\02345
