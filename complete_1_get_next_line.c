@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   complete_1_get_next_line.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/27 19:52:07 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/27 19:38:38 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*backup[OPEN_MAX];
+	static char	*backup;
 	char		*line;
 	char		*result_line;
 	char		*buffer;
@@ -33,7 +33,7 @@ char	*get_next_line(int fd)
 	free(buffer);
 	if (line == NULL || line[0] == '\0')
 	{
-		if (line != 0)
+		if (line)
 			free(backup);
 		backup = NULL;
 		return (NULL);
@@ -76,7 +76,6 @@ char	*make_line(int fd, char *backup, char *buffer)
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
 		free(temp);
-		temp = NULL;
 		if (backup == NULL)
 			return (NULL);
 		if (ft_strchr(backup, '\n'))
@@ -95,11 +94,6 @@ char	*save_backup(char **line)
 		i++;
 	if ((*line)[i] == '\0' || (*line)[i + 1] == '\0')
 		return (NULL);
-
-	// char *new_line = ft_strdup(*line); // Add this line
-	// free(*line); // And this line
-	// *line = new_line; // And this line
-
 	backup = ft_strdup((*line) + i + 1);
 	if (backup == NULL)
 	{
@@ -110,7 +104,7 @@ char	*save_backup(char **line)
 	(*line)[i + 1] = '\0';
 	return (backup);
 }
-//abcd\n1234
+//abcd\n\0 1234
 //abcd\n1234
 //라인이 잘 못됐을 때 백업을 프리해줬었다
 char	*cut_line(char **line)
@@ -125,7 +119,7 @@ char	*cut_line(char **line)
 		result_line = ft_strdup(*line);
 	else
 		result_line = ft_substr(*line, 0, i + 1);
-	if (!result_line)
+	if (result_line == 0)
 	{
 		free(*line);
 		return (NULL);
@@ -133,7 +127,7 @@ char	*cut_line(char **line)
 	return (result_line);
 }
 ////abc\n12345
-////abc\n\02345
+////abc\n\0    2345
 //a\0
 
 //backup, buffer, line
