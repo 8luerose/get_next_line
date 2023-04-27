@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/27 19:52:07 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/27 20:58:14 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*backup[OPEN_MAX];
+	// static char	*backup[OPEN_MAX];
+	static char	*backup;
 	char		*line;
 	char		*result_line;
 	char		*buffer;
