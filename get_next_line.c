@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/26 20:59:26 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:57:53 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,18 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	backup = save_backup(&line);
+	if (!backup)
+	{
+		// all free
+		// null return
+	}
 	result_line = cut_line(&line);
-	if (line)
-		free (line);
+	if (!backup)
+	{
+		// all free
+		// null return
+	}
+	free (line);
 	return (result_line);
 }
 
@@ -79,9 +88,9 @@ char	*save_backup(char **line)
 	if ((*line)[i] == '\0' || (*line)[i + 1] == '\0')
 		return (NULL);
 
-	char *new_line = ft_strdup(*line); // Add this line
-	free(*line); // And this line
-	*line = new_line; // And this line
+	// char *new_line = ft_strdup(*line); // Add this line
+	// free(*line); // And this line
+	// *line = new_line; // And this line
 
 	backup = ft_strdup((*line) + i + 1);
 	if (backup == NULL)
@@ -92,7 +101,9 @@ char	*save_backup(char **line)
 	(*line)[i + 1] = '\0';
 	return (backup);
 }
-
+//abcd\n1234
+//abcd\n1234
+//라인이 잘 못됐을 때 백업을 프리해줬었다
 char	*cut_line(char **line)
 {
 	int		i;
@@ -105,8 +116,11 @@ char	*cut_line(char **line)
 		result_line = ft_strdup(*line);
 	else
 		result_line = ft_substr(*line, 0, i + 1);
-	if (!result_line)
+	if (result_line == NULL)
+	{
+		free(*line);
 		return (NULL);
+	}
 	return (result_line);
 }
 ////abc\n12345
