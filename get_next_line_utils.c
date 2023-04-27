@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:37 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/22 17:36:04 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:52:53 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strdup(const char *s1)
 
 	len = ft_strlen(s1);
 	arr = (char *)malloc((len + 1) * (sizeof(char)));
-	if (!(arr))
+	if ((arr) == 0)
 		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')
@@ -108,7 +108,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (result_len > len)
 		result_len = len;
 	result = (char *)malloc((result_len + 1) * sizeof(char));
-	if (!result)
+	if (result == 0)
 		return (0);
 	result_cpy = result;
 	while (*(s + start))

@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/27 18:14:58 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:18:48 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,18 @@ char	*get_next_line(int fd)
 	free(buffer);
 	if (line == NULL || line[0] == '\0')
 	{
-		if (line)
-			free(backup);
+		free(backup);
 		backup = NULL;
 		return (NULL);
 	}
 	backup = save_backup(&line);
-	if (backup == 0 && line == NULL)
+	if (!backup && !(line[ft_strlen(line) -1] == '\n'))
 		return (NULL);
 	result_line = cut_line(&line);
-	// if (line)
-	free (line);
+	if (!result_line)
+		return (NULL);
+	if (line)
+		free (line);
 	return (result_line);
 }
 
@@ -53,10 +54,7 @@ char	*make_line(int fd, char *backup, char *buffer)
 		if (len == 0)
 			break ;
 		if (len == -1)
-		{
-			free(backup);
 			return (NULL);
-		}
 		buffer[len] = '\0';
 		if (backup == NULL)
 			backup = ft_strdup("");
@@ -65,6 +63,7 @@ char	*make_line(int fd, char *backup, char *buffer)
 		temp = backup;
 		backup = ft_strjoin(temp, buffer);
 		free(temp);
+		temp = NULL;
 		if (backup == NULL)
 			return (NULL);
 		if (ft_strchr(backup, '\n'))
@@ -98,7 +97,7 @@ char	*save_backup(char **line)
 	(*line)[i + 1] = '\0';
 	return (backup);
 }
-//abcd\n\0 1234
+//abcd\n1234
 //abcd\n1234
 //라인이 잘 못됐을 때 백업을 프리해줬었다
 char	*cut_line(char **line)
@@ -113,12 +112,15 @@ char	*cut_line(char **line)
 		result_line = ft_strdup(*line);
 	else
 		result_line = ft_substr(*line, 0, i + 1);
-	if (result_line == 0)
+	if (result_line == NULL)
+	{
+		free(*line);
 		return (NULL);
+	}
 	return (result_line);
 }
 ////abc\n12345
-////abc\n\0    2345
+////abc\n\02345
 //a\0
 
 //backup, buffer, line
