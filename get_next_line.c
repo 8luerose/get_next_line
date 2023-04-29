@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/29 20:12:20 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 20:12:26 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*backup[OPEN_MAX + 1];
+	static char	*backup;
 	char		*line;
 	char		*result_line;
 	char		buffer[BUFFER_SIZE + 1];
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = make_line(fd, backup[fd], buffer);
+	line = make_line(fd, backup, buffer);
 	if (line == NULL || line[0] == '\0')
 	{
 		if (line != 0)
-			free(backup[fd]);
-		backup[fd] = NULL;
+			free(backup);
+		backup = NULL;
 		return (NULL);
 	}
-	backup[fd] = save_backup(&line);
-	if (backup[fd] == NULL && line == NULL)
+	backup = save_backup(&line);
+	if (backup == NULL && line == NULL)
 		return (NULL);
 	result_line = cut_line(&line);
 	if (result_line == NULL)
-		return (gnl_free(&backup[fd]));
+		return (gnl_free(&backup));
 	free (line);
 	return (result_line);
 }
