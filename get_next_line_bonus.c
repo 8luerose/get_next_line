@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/29 20:12:20 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 20:13:17 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,3 @@ char	*gnl_free(char **p)
 	*p = NULL;
 	return (NULL);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {	
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open("./test.txt", O_RDONLY);
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 			break ;
-// 		printf("%s", line);
-// 	}
-// 	fd = open("./test.txt", O_RDONLY);
-// 	return (0);
-// }
