@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/29 17:59:28 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:18:35 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	// buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	// if (buffer == NULL)
+	// 	return (gnl_free(&backup));
 	line = make_line(fd, backup, buffer);
+	// free(buffer);
 	if (line == NULL || line[0] == '\0')
 	{
 		if (line != 0)
 			free(backup);
-		backup = NULL;
-		return (NULL);
+		return (backup = NULL);
 	}
 	backup = save_backup(&line);
 	if (backup == 0 && line == NULL)

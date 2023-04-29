@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:21:07 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/27 21:19:48 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:59:05 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 49152
-# endif
+// # ifndef OPEN_MAX
+// #  define OPEN_MAX 49152
+// # endif
 
 char	*get_next_line(int fd);
 char	*make_line(int fd, char *backup, char *buffer);
 char	*save_backup(char **line);
 char	*cut_line(char **line);
+char	*gnl_free(char **p);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
