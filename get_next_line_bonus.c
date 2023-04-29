@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/29 19:42:17 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 19:45:47 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*backup[OPEN_MAX];
+	static char	*backup[OPEN_MAX + 1];
 	char		*line;
 	char		*result_line;
 	char		buffer[BUFFER_SIZE + 1];
@@ -127,12 +127,3 @@ int	main(void)
 	fd = open("./test.txt", O_RDONLY);
 	return (0);
 }
-
-
-///abc\n12345
-////abc\n\02345
-//a\0
-
-//backup, buffer, line
-//static 구조체 (fd, backup, next)
-//char * buffer, line
