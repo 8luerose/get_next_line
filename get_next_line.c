@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:56:39 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/29 17:59:28 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 19:39:46 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	backup = save_backup(&line);
-	if (backup == 0 && line == NULL)
+	if (backup == NULL && line == NULL)
 		return (NULL);
 	result_line = cut_line(&line);
 	if (result_line == NULL)
@@ -109,10 +109,21 @@ char	*gnl_free(char **p)
 	return (NULL);
 }
 
-///abc\n12345
-////abc\n\02345
-//a\0
+#include <stdio.h>
 
-//backup, buffer, line
-//static 구조체 (fd, backup, next)
-//char * buffer, line
+int	main(void)
+{	
+	int		fd;
+	char	*line;
+
+	fd = open("./test.txt", O_RDONLY);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		printf("%s", line);
+	}
+	fd = open("./test.txt", O_RDONLY);
+	return (0);
+}

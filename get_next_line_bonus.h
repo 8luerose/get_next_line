@@ -6,7 +6,7 @@
 /*   By: taehkwon <taehkwon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 22:21:07 by taehkwon          #+#    #+#             */
-/*   Updated: 2023/04/29 18:13:00 by taehkwon         ###   ########.fr       */
+/*   Updated: 2023/04/29 19:31:33 by taehkwon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <limits.h>
+# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
 
-// # ifndef OPEN_MAX
-// #  define OPEN_MAX 49152
-// # endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 49152
+# endif
 
 char	*get_next_line(int fd);
 char	*make_line(int fd, char *backup, char *buffer);
